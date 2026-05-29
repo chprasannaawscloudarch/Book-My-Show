@@ -40,14 +40,18 @@ Secure Mail Transfer Protocol over SSL/TLS. Used for sending emails securely via
 
 Custom TCP         TCP           30000-32767
 Kubernetes NodePort service range.
+
 =============================
 1.2. Creation of EKS Cluster
 =============================
+In Order to create the EKS Cluster we should not create EKS Cluster by using root user or by using root account. For that Create IAM User->Attcach the required policies->And then we have to configure the AWS by creating the Accesskeys and SecretKeys.Only then we can create the EKS Cluster.
 1.2.1. Creation of IAM user (To create EKS Cluster, its not recommended to create using Root Account)
-
+IAM User: eks-kastro-user
+Password: Password@123
 1.2.2. Attach policies to the user 
- AmazonEC2FullAccess, AmazonEKS_CNI_Policy, AmazonEKSClusterPolicy, AmazonEKSWorkerNodePolicy, AWSCloudFormationFullAccess, IAMFullAccess
-
+AmazonEC2FullAccess, AmazonEKS_CNI_Policy, AmazonEKSClusterPolicy, AmazonEKSWorkerNodePolicy, AWSCloudFormationFullAccess, IAMFullAccess
+Same User to give eks permissions as well.
+Will create InlinePolicy:
 Attach the below inline policy also for the same user
 {
     "Version": "2012-10-17",
@@ -60,7 +64,7 @@ Attach the below inline policy also for the same user
         }
     ]
 }
-
+Note: It is about eks policy complete permissions.
 
 1.2.3. Create Access Keys for the user created
 
@@ -216,7 +220,7 @@ docker --version
 Try to pull some default image ----> docker pull hello-world ----> If you are unable to pull the image, execute the below command to provide necessary permissions ----> sudo chmod 666 /var/run/docker.sock ----> docker pull hello-world ----> You will be able to pull the image
 
 Make sure to Login to DockerHub account in browser
-Goto MobaXTerm Terminal ---> Login to DockerHub ---> docker login -u <DockerHubUserName> ---> Click Enter ---> Enter the password of DockerHub 
+Goto MobaXTerm Terminal ---> Login to DockerHub ---> docker login -u chuprasa ---> Click Enter ---> Enter the password of DockerHub 
 =============================
 2.1.3. Install Trivy on Jenkins Server
 =============================
@@ -240,7 +244,7 @@ docker ps
 
 Access SonarQube, after opening port 9000
 Default username and Password: admin
-Set new password
+Set new password: password123
 
 ************************************
 Step 3: Access Jenkins Dashboard
